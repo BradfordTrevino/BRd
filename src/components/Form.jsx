@@ -2,7 +2,9 @@ import React from 'react';
 
 function Form() {
   return (
-    <div>Hello World!</div>
+    <div className="form-container">
+      <h1>BRd</h1>
+    </div>
   );
 }
 
