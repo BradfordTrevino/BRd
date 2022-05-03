@@ -10,10 +10,6 @@ const port = 3100;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.all('/*', (req, res) => {
   const { method, params, body } = req;
   const url = `http://www.boredapi.com/api${req.url}`;
