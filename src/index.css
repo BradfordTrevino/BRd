@@ -49,22 +49,16 @@ table {
 
 /* END OF CSS RESET */
 
+html {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+}
+
 body {
   font-family: 'Lato', sans-serif;
-}
-
-/* FORM */
-
-.form-container {
-  display: flex;
-	flex-direction: column;
-  height: 100%;
-  font-size: 72px;
-  font-weight: 700;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-container h1 {
-  align-self: center;
+	background: linear-gradient(60deg, rgb(16,13,47), rgb(77,25,83));
+	color: #fff;
 }

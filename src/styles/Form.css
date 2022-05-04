@@ -1,0 +1,55 @@
+.form-container {
+  display: flex;
+	flex-direction: column;
+  height: 100%;
+  font-size: 72px;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+	background-image: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.form-container h1 {
+  align-self: center;
+	font-weight: 700;
+}
+
+select {
+	height: 25px;
+	width: 200px;
+	font-weight: 300;
+	margin-top: 5px;
+	text-align: center;
+	appearance: none;
+	text-indent: 1px;
+	border-radius: 3px;
+	border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178)) 1;
+	background: transparent;
+	color: #fff;
+}
+
+button {
+	height: 25px;
+	width: 200px;
+	margin-top: 10px;
+	text-align: center;
+	border-radius: 12.5px;
+	border-width: 0;
+  border-style: solid;
+  background: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+	color: white;
+}
+
+.no-activity {
+	margin-top: 10px;
+	font-size: 12px;
+	font-weight: 300;
+}

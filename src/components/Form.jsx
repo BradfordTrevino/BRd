@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 import React, {
-  useContext,
+  useContext, useState,
 } from 'react';
-import { getActivityByType } from '../../helpers';
+import { getActivityByTypeAndParticipants } from '../../helpers';
 import { AppContext } from '../context/AppContext';
+import '../styles/Form.css';
 
 function Form() {
   const {
@@ -11,12 +12,22 @@ function Form() {
     setType,
     participants,
     setParticipants,
+    setActivity,
   } = useContext(AppContext);
 
+  const [noActivity, setNoActivity] = useState(false);
+
   const handleButtonClick = () => {
-    getActivityByType(type)
+    getActivityByTypeAndParticipants(type, participants)
       .then((response) => {
         console.log(response);
+        if (response.error) {
+          setNoActivity(true);
+          setActivity('');
+        } else {
+          setNoActivity(false);
+          setActivity(response);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -37,7 +48,9 @@ function Form() {
 
   return (
     <div className="form-container">
-      <h1>BRd</h1>
+      <div className="logo-container">
+        <h1>BRd</h1>
+      </div>
 
       <select
         id="type-selector"
@@ -60,8 +73,12 @@ function Form() {
         type="submit"
         onClick={handleButtonClick}
       >
-        Submit
+        SUBMIT
       </button>
+
+      { noActivity
+        ? <span className="no-activity">No activites found with these parameters!</span>
+        : null }
 
     </div>
   );

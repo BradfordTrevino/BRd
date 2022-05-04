@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Form from './components/Form';
-import './App.css';
-import { AppContextProvider } from './context/AppContext';
+import Activity from './components/Activity';
+import './styles/App.css';
+import { AppContext, AppContextProvider } from './context/AppContext';
 
 function App() {
+  const {
+    activity,
+  } = useContext(AppContext);
+
   return (
     <AppContextProvider>
-      <Form />
+      <div className="app-container">
+        <Form />
+        { activity
+          ? null
+          : <Activity /> }
+      </div>
     </AppContextProvider>
   );
 }
