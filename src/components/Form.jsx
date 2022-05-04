@@ -22,6 +22,9 @@ function Form() {
   const [showParticipants, setShowParticipants] = useState(false);
 
   const handleSubmitClick = () => {
+    if (!type) {
+      return;
+    }
     getActivityByTypeAndParticipants(type, participants)
       .then((response) => {
         if (response.error) {
@@ -60,20 +63,16 @@ function Form() {
     setShowRecentActivities(true);
   };
 
-  const handleInputChange = (e) => {
-    e.preventDefault();
-    if (e.target.id === 'type-selector') {
-      setType(e.target.value);
-    }
-    if (e.target.id === 'participant-selector') {
-      setParticipants(e.target.value);
-    }
-  };
-
   const handleTypeChange = (e) => {
     e.preventDefault();
     setType(e.target.value);
     setShowParticipants(true);
+    document.getElementById('submit-button').classList.remove('disabled');
+  };
+
+  const handleParticipantChange = (e) => {
+    e.preventDefault();
+    setParticipants(e.target.value);
   };
 
   const types = ['education', 'recreational', 'social', 'diy', 'charity', 'cooking', 'relaxation', 'music', 'busywork'];
@@ -97,7 +96,7 @@ function Form() {
         ? (
           <select
             id="participant-selector"
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleParticipantChange(e)}
             defaultValue="PARTICIPANTS"
           >
             <option value="PARTICIPANTS" disabled hidden className="default">ADD PARTICIPANTS</option>
@@ -111,8 +110,10 @@ function Form() {
 
       <div className="button-container">
         <button
+          id="submit-button"
           type="submit"
           onClick={handleSubmitClick}
+          className="disabled"
         >
           SUBMIT
         </button>
