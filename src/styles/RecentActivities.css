@@ -1,0 +1,12 @@
+.activities-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: scroll;
+  width: 250px;
+}
+
+.activity {
+  margin-top: 20px;
+}

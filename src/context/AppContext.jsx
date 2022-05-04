@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 export const AppContext = createContext({});
 
 export function AppContextProvider({ children }) {
-  const [type, setType] = useState('education');
-  const [participants, setParticipants] = useState('1');
+  const [type, setType] = useState('');
+  const [participants, setParticipants] = useState('');
   const [activity, setActivity] = useState(null);
+  const [recentActivities, setRecentActivities] = useState([]);
+  const [showRecentActivities, setShowRecentActivities] = useState(false);
 
   const AppContextValues = useMemo(() => ({
     type,
@@ -17,6 +19,10 @@ export function AppContextProvider({ children }) {
     setParticipants,
     activity,
     setActivity,
+    recentActivities,
+    setRecentActivities,
+    showRecentActivities,
+    setShowRecentActivities,
   }));
 
   return (

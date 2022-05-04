@@ -1,23 +1,28 @@
 import React, { useContext } from 'react';
 import Form from './components/Form';
 import Activity from './components/Activity';
+import RecentActivities from './components/RecentActivities';
+import { AppContext } from './context/AppContext';
 import './styles/App.css';
-import { AppContext, AppContextProvider } from './context/AppContext';
+
+sessionStorage.clear();
 
 function App() {
   const {
-    activity,
+    showRecentActivities,
   } = useContext(AppContext);
 
   return (
-    <AppContextProvider>
-      <div className="app-container">
-        <Form />
-        { activity
-          ? null
-          : <Activity /> }
-      </div>
-    </AppContextProvider>
+    <div className="app-container">
+      { showRecentActivities
+        ? <RecentActivities />
+        : (
+          <div>
+            <Form />
+            <Activity />
+          </div>
+        ) }
+    </div>
   );
 }
 

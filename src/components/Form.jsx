@@ -2,7 +2,7 @@
 import React, {
   useContext, useState,
 } from 'react';
-import { getRandomActivity, getActivityByTypeAndParticipants, getAllRecentActivities } from '../../helpers';
+import { getRandomActivity, getActivityByTypeAndParticipants } from '../../helpers';
 import { AppContext } from '../context/AppContext';
 import '../styles/Form.css';
 
@@ -12,7 +12,10 @@ function Form() {
     setType,
     participants,
     setParticipants,
+    activity,
     setActivity,
+    setRecentActivities,
+    setShowRecentActivities,
   } = useContext(AppContext);
 
   const [noActivity, setNoActivity] = useState(false);
@@ -27,6 +30,7 @@ function Form() {
         } else {
           setNoActivity(false);
           setActivity(response);
+          sessionStorage.setItem(response.key, response.activity);
         }
       })
       .catch((error) => {
@@ -43,6 +47,7 @@ function Form() {
         } else {
           setNoActivity(false);
           setActivity(response);
+          sessionStorage.setItem(response.key, response.activity);
         }
       })
       .catch((error) => {
@@ -51,13 +56,8 @@ function Form() {
   };
 
   const handleShowAllClick = () => {
-    getAllRecentActivities()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setRecentActivities(Object.values(sessionStorage));
+    setShowRecentActivities(true);
   };
 
   const handleInputChange = (e) => {
@@ -79,7 +79,7 @@ function Form() {
   const types = ['education', 'recreational', 'social', 'diy', 'charity', 'cooking', 'relaxation', 'music', 'busywork'];
 
   return (
-    <div className="form-container">
+    <div className="form-container animate">
       <div className="logo-container">
         <h1>BRd</h1>
       </div>
@@ -87,8 +87,9 @@ function Form() {
       <select
         id="type-selector"
         onChange={(e) => handleTypeChange(e)}
+        defaultValue="TYPE"
       >
-        <option value="" disabled selected hidden>TYPE</option>
+        <option value="TYPE" disabled hidden className="default">ADD TYPE</option>
         {types.map((activityType) => <option key={activityType} value={activityType}>{activityType.toUpperCase()}</option>)}
       </select>
 
@@ -97,8 +98,9 @@ function Form() {
           <select
             id="participant-selector"
             onChange={(e) => handleInputChange(e)}
+            defaultValue="PARTICIPANTS"
           >
-            <option value="" disabled selected hidden>PARTICIPANTS</option>
+            <option value="PARTICIPANTS" disabled hidden className="default">ADD PARTICIPANTS</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -123,16 +125,20 @@ function Form() {
         </button>
       </div>
 
-      <button
-        type="submit"
-        className="show-all"
-        onClick={handleShowAllClick}
-      >
-        SHOW RECENT ACTIVITIES
-      </button>
+      { activity
+        ? (
+          <button
+            type="submit"
+            className="show-all"
+            onClick={handleShowAllClick}
+          >
+            SHOW RECENT ACTIVITIES
+          </button>
+        )
+        : null }
 
       { noActivity
-        ? <span className="no-activity">No activites found with these parameters!</span>
+        ? <span className="no-activity">No activities found with these parameters!</span>
         : null }
 
     </div>
