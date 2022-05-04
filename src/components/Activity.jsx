@@ -15,8 +15,9 @@ function Activity() {
 
   return (
     <div className="activity-container">
-      {activity.activity}
-
+      <div className="activity-name">
+        {activity.activity}
+      </div>
       <div className="details-container">
         <div className="accessibility-container">
           <div className="accessibility" style={{ width: `${activity.accessibility * 100}%` }} />

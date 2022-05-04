@@ -2,7 +2,6 @@
   display: flex;
 	flex-direction: column;
   height: 100%;
-  font-size: 72px;
   font-weight: 700;
   justify-content: center;
   align-items: center;
@@ -17,31 +16,40 @@
 
 .form-container h1 {
   align-self: center;
+	font-size: 104px;
 	font-weight: 700;
 }
 
 select {
-	height: 25px;
-	width: 200px;
+	height: 36px;
+	width: 250px;
 	font-weight: 300;
-	margin-top: 5px;
-	text-align: center;
+	font-size: 14px;
+	margin-top: 8px;
 	appearance: none;
+	text-align: center;
 	text-indent: 1px;
-	border-radius: 3px;
-	border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178)) 1;
-	background: transparent;
-	color: #fff;
+	border: double 2px transparent;
+  border-radius: 80px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, rgb(226, 122, 152), rgb(156,26,178));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+	color: rgb(77,25,83);
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	width: 250px;
 }
 
 button {
-	height: 25px;
-	width: 200px;
-	margin-top: 10px;
+	height: 36px;
+	width: 49%;
+	margin-top: 8px;
+	font-size: 12px;
 	text-align: center;
-	border-radius: 12.5px;
+	border-radius: 18px;
 	border-width: 0;
   border-style: solid;
   background: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));

@@ -7,6 +7,11 @@
   font-weight: 300;
 }
 
+.activity-name {
+  width: 250px;
+  align-self: center;
+}
+
 .details-container {
   display: flex;
   flex-direction: column;
@@ -15,33 +20,33 @@
 }
 
 .accessibility-container {
-  height: 10px;
-  width: 200px;
+  height: 12px;
+  width: 250px;
   margin-top: 20px;
-  background-color: rgb(156,26,178);
-  border-radius: 5px;
+  background-color: rgba(255,255,255,.75);
+  border-radius: 6px;
   box-shadow: inset 0 0 5px rgb(77,25,83);
 }
 
 .accessibility {
-  height: 10px;
-  background-color: rgb(226,122,152);
-  border-radius: 5px;
+  height: 12px;
+  background: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+  border-radius: 6px;
 }
 
 .price-container {
-  height: 10px;
-  width: 200px;
+  height: 12px;
+  width: 250px;
   margin-top: 20px;
-  background-color: rgb(156,26,178);
-  border-radius: 5px;
+  background-color: rgba(255,255,255,.75);
+  border-radius: 6px;
   box-shadow: inset 0 0 5px rgb(77,25,83);
 }
 
 .price {
-  height: 10px;
-  background-color: rgb(226,122,152);
-  border-radius: 5px;
+  height: 12px;
+  background: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+  border-radius: 6px;
 }
 
 .detail {

@@ -2,7 +2,7 @@
 import React, {
   useContext, useState,
 } from 'react';
-import { getActivityByTypeAndParticipants } from '../../helpers';
+import { getRandomActivity, getActivityByTypeAndParticipants } from '../../helpers';
 import { AppContext } from '../context/AppContext';
 import '../styles/Form.css';
 
@@ -16,11 +16,27 @@ function Form() {
   } = useContext(AppContext);
 
   const [noActivity, setNoActivity] = useState(false);
+  const [showParticipants, setShowParticipants] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleSubmitClick = () => {
     getActivityByTypeAndParticipants(type, participants)
       .then((response) => {
-        console.log(response);
+        if (response.error) {
+          setNoActivity(true);
+          setActivity('');
+        } else {
+          setNoActivity(false);
+          setActivity(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleRandomClick = () => {
+    getRandomActivity()
+      .then((response) => {
         if (response.error) {
           setNoActivity(true);
           setActivity('');
@@ -44,6 +60,12 @@ function Form() {
     }
   };
 
+  const handleTypeChange = (e) => {
+    e.preventDefault();
+    setType(e.target.value);
+    setShowParticipants(true);
+  };
+
   const types = ['education', 'recreational', 'social', 'diy', 'charity', 'cooking', 'relaxation', 'music', 'busywork'];
 
   return (
@@ -54,27 +76,42 @@ function Form() {
 
       <select
         id="type-selector"
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleTypeChange(e)}
       >
+        <option value="" disabled selected hidden>+</option>
         {types.map((activityType) => <option key={activityType} value={activityType}>{activityType.toUpperCase()}</option>)}
       </select>
 
-      <select
-        id="participant-selector"
-        onChange={(e) => handleInputChange(e)}
-      >
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+      { showParticipants
+        ? (
+          <select
+            id="participant-selector"
+            onChange={(e) => handleInputChange(e)}
+          >
+            <option value="" disabled selected hidden>+</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        )
+        : null}
 
-      <button
-        type="submit"
-        onClick={handleButtonClick}
-      >
-        SUBMIT
-      </button>
+      <div className="button-container">
+        <button
+          type="submit"
+          onClick={handleSubmitClick}
+        >
+          SUBMIT
+        </button>
+
+        <button
+          type="submit"
+          onClick={handleRandomClick}
+        >
+          SURPRISE ME
+        </button>
+      </div>
 
       { noActivity
         ? <span className="no-activity">No activites found with these parameters!</span>
