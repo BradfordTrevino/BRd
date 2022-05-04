@@ -81,6 +81,9 @@ function Form() {
     <div className="form-container animate">
       <div className="logo-container">
         <h1>BRd</h1>
+        <p className="description">
+          Your daily activity finder
+        </p>
       </div>
 
       <select
