@@ -69,6 +69,7 @@ function Form() {
     setFavorite(!favorite);
     if (!favorite) {
       sessionStorage.setItem(activity.key, activity.activity);
+      document.getElementById('show-favorites').classList.remove('disabled');
     } else {
       sessionStorage.removeItem(activity.key);
     }
@@ -102,7 +103,7 @@ function Form() {
         onChange={(e) => handleTypeChange(e)}
         defaultValue="TYPE"
       >
-        <option value="TYPE" disabled hidden className="default">ADD TYPE</option>
+        <option value="TYPE" disabled hidden className="default">SELECT TYPE</option>
         {types.map((activityType) => <option key={activityType} value={activityType}>{activityType.toUpperCase()}</option>)}
       </select>
 
@@ -113,7 +114,7 @@ function Form() {
             onChange={(e) => handleParticipantChange(e)}
             defaultValue="PARTICIPANTS"
           >
-            <option value="PARTICIPANTS" disabled hidden className="default">ADD PARTICIPANTS</option>
+            <option value="PARTICIPANTS" disabled hidden className="default">SELECT # OF PARTICIPANTS</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -137,7 +138,7 @@ function Form() {
           onClick={handleRandomClick}
           className="surprise"
         >
-          SURPRISE ME
+          RANDOM
         </button>
       </div>
 
@@ -145,8 +146,9 @@ function Form() {
         ? (
           <div className="favorites-button-container">
             <button
+              id="show-favorites"
               type="submit"
-              className="show-all"
+              className={`show-favorites ${Object.keys(sessionStorage).length > 0}`}
               onClick={handleShowAllClick}
             >
               SHOW FAVORITES

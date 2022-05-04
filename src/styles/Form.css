@@ -79,8 +79,12 @@ button.surprise {
 	width: 250px;
 }
 
-button.show-all {
+button.show-favorites {
 	width: 192px;
+}
+
+.show-favorites.false {
+	opacity: 60%;
 }
 
 button.favorite {
