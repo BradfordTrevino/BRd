@@ -6,11 +6,13 @@ import '../styles/RecentActivities.css';
 
 function RecentActivities() {
   const {
+    setActivity,
     recentActivities,
     setShowRecentActivities,
   } = useContext(AppContext);
 
   const handleBackClick = () => {
+    setActivity(null);
     setShowRecentActivities(false);
   };
 
@@ -19,7 +21,7 @@ function RecentActivities() {
       { recentActivities.map((activity) => <div key={activity} className="activity">{activity}</div>)}
       <button
         type="submit"
-        className="show-all"
+        className="back"
         onClick={handleBackClick}
       >
         BACK

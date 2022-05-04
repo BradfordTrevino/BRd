@@ -22,7 +22,7 @@
 }
 
 .animate {
-	animation: 2.5s slide-down;
+	animation: 2.5s fade-in;
 	animation-iteration-count: 1;
 }
 
@@ -33,12 +33,12 @@
 	margin-top: 0%;
 }
 
-@keyframes slide-down {
+@keyframes fade-in {
 	from {
-		margin-top: -400%;
+		opacity: 0;
 	}
 	to {
-		margin-top: 0%;
+		opacity: 1;
 	}
 }
 
@@ -65,9 +65,33 @@ select {
 	width: 250px;
 }
 
+button.submit {
+	width: 121px;
+}
+
+button.surprise {
+	width: 121px;
+}
+
+.favorites-button-container {
+	display: flex;
+	justify-content: space-between;
+	width: 250px;
+}
+
+button.show-all {
+	width: 192px;
+}
+
+button.favorite {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+}
+
 button {
 	height: 36px;
-	width: 49%;
 	margin-top: 8px;
 	font-size: 12px;
 	text-align: center;
@@ -80,10 +104,6 @@ button {
 
 button.disabled {
 	opacity: 60%;
-}
-
-button.show-all {
-	width: 100%;
 }
 
 .no-activity {

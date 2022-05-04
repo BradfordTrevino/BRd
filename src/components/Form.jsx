@@ -2,6 +2,7 @@
 import React, {
   useContext, useState,
 } from 'react';
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
 import { getRandomActivity, getActivityByTypeAndParticipants } from '../../helpers';
 import { AppContext } from '../context/AppContext';
 import '../styles/Form.css';
@@ -20,6 +21,7 @@ function Form() {
 
   const [noActivity, setNoActivity] = useState(false);
   const [showParticipants, setShowParticipants] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   const handleSubmitClick = () => {
     if (!type) {
@@ -33,7 +35,7 @@ function Form() {
         } else {
           setNoActivity(false);
           setActivity(response);
-          sessionStorage.setItem(response.key, response.activity);
+          setFavorite(false);
         }
       })
       .catch((error) => {
@@ -50,7 +52,7 @@ function Form() {
         } else {
           setNoActivity(false);
           setActivity(response);
-          sessionStorage.setItem(response.key, response.activity);
+          setFavorite(false);
         }
       })
       .catch((error) => {
@@ -61,6 +63,15 @@ function Form() {
   const handleShowAllClick = () => {
     setRecentActivities(Object.values(sessionStorage));
     setShowRecentActivities(true);
+  };
+
+  const handleFavoriteClick = () => {
+    setFavorite(!favorite);
+    if (!favorite) {
+      sessionStorage.setItem(activity.key, activity.activity);
+    } else {
+      sessionStorage.removeItem(activity.key);
+    }
   };
 
   const handleTypeChange = (e) => {
@@ -116,7 +127,7 @@ function Form() {
           id="submit-button"
           type="submit"
           onClick={handleSubmitClick}
-          className="disabled"
+          className="submit disabled"
         >
           SUBMIT
         </button>
@@ -124,6 +135,7 @@ function Form() {
         <button
           type="submit"
           onClick={handleRandomClick}
+          className="surprise"
         >
           SURPRISE ME
         </button>
@@ -131,13 +143,24 @@ function Form() {
 
       { activity
         ? (
-          <button
-            type="submit"
-            className="show-all"
-            onClick={handleShowAllClick}
-          >
-            SHOW RECENT ACTIVITIES
-          </button>
+          <div className="favorites-button-container">
+            <button
+              type="submit"
+              className="show-all"
+              onClick={handleShowAllClick}
+            >
+              SHOW FAVORITES
+            </button>
+            <button
+              type="submit"
+              className="favorite"
+              onClick={handleFavoriteClick}
+            >
+              { favorite
+                ? <MdOutlineFavorite />
+                : <MdOutlineFavoriteBorder /> }
+            </button>
+          </div>
         )
         : null }
 
