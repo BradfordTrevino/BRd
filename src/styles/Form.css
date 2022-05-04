@@ -8,7 +8,7 @@
 }
 
 .logo-container {
-	background-image: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+	background-image: linear-gradient(135deg, rgb(226,122,152), rgb(156,26,178));
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -52,8 +52,12 @@ button {
 	border-radius: 18px;
 	border-width: 0;
   border-style: solid;
-  background: linear-gradient(60deg, rgb(226,122,152), rgb(156,26,178));
+  background: linear-gradient(135deg, rgb(226,122,152), rgb(156,26,178));
 	color: white;
+}
+
+button.show-all {
+	width: 100%;
 }
 
 .no-activity {

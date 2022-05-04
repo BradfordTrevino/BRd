@@ -2,7 +2,7 @@
 import React, {
   useContext, useState,
 } from 'react';
-import { getRandomActivity, getActivityByTypeAndParticipants } from '../../helpers';
+import { getRandomActivity, getActivityByTypeAndParticipants, getAllRecentActivities } from '../../helpers';
 import { AppContext } from '../context/AppContext';
 import '../styles/Form.css';
 
@@ -50,6 +50,16 @@ function Form() {
       });
   };
 
+  const handleShowAllClick = () => {
+    getAllRecentActivities()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleInputChange = (e) => {
     e.preventDefault();
     if (e.target.id === 'type-selector') {
@@ -78,7 +88,7 @@ function Form() {
         id="type-selector"
         onChange={(e) => handleTypeChange(e)}
       >
-        <option value="" disabled selected hidden>+</option>
+        <option value="" disabled selected hidden>TYPE</option>
         {types.map((activityType) => <option key={activityType} value={activityType}>{activityType.toUpperCase()}</option>)}
       </select>
 
@@ -88,7 +98,7 @@ function Form() {
             id="participant-selector"
             onChange={(e) => handleInputChange(e)}
           >
-            <option value="" disabled selected hidden>+</option>
+            <option value="" disabled selected hidden>PARTICIPANTS</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -112,6 +122,14 @@ function Form() {
           SURPRISE ME
         </button>
       </div>
+
+      <button
+        type="submit"
+        className="show-all"
+        onClick={handleShowAllClick}
+      >
+        SHOW RECENT ACTIVITIES
+      </button>
 
       { noActivity
         ? <span className="no-activity">No activites found with these parameters!</span>

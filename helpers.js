@@ -17,4 +17,11 @@ const getActivityByTypeAndParticipants = (type, participants) => axios
   .then((response) => response.data)
   .catch((error) => console.error(error));
 
-export { getRandomActivity, getActivityByType, getActivityByTypeAndParticipants };
+const getAllRecentActivities = (type, participants) => axios
+  .get(`${host}/activity?type=${type}&participants=${participants}`)
+  .then((response) => response.data)
+  .catch((error) => console.error(error));
+
+export {
+  getRandomActivity, getActivityByType, getActivityByTypeAndParticipants, getAllRecentActivities,
+};
