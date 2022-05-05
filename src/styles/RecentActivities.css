@@ -7,7 +7,9 @@
 }
 
 .activity {
-  margin-top: 20px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
 }
 
 button.back {
